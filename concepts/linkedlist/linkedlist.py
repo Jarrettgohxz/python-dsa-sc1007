@@ -19,6 +19,17 @@ class LinkedList:
             
         print("NONE")
     
+    def getsize(self):
+        current = self.head
+        
+        size = 0
+        
+        while current:
+            current = current.next
+            size+=1
+        
+        return size
+    
         
     def insert_at_front(self, data):
         new_node = Node(data)
@@ -117,10 +128,6 @@ class LinkedList:
         
         del node_to_del
         return 1
-        
-        
-
-        
        
 # Test the implementationW
 if __name__ == "__main__":
@@ -151,12 +158,16 @@ if __name__ == "__main__":
     linked_list.display()
     print('\n')
     
-    linked_list.remove_node_at(4)
+    # print(f'size before: {linked_list.getsize()}')
+    # linked_list.remove_node_at(4)
 
         
-    print("[AFTER] Current linked list:", end="\n")
-    linked_list.display()
-    print('\n')
+    # print("[AFTER] linked list:", end="\n")
+    # linked_list.display()
+    # print('\n')
+    
+    # print(f'size after: {linked_list.getsize()}')
+    
     
     
 

@@ -46,7 +46,34 @@ class LinkedList:
         print("NONE")
     
 
-       
+    def findAt(self, index):
+        # get first node
+        current = self.head
+        
+        if not current:
+            return None
+
+        # iterate through index
+        while index > 0:
+            current = current.next
+
+            if not current:
+                return None
+
+            index-=1
+
+        return current
+    
+    def insert_at_front(self, data):
+        new_node = Node(data)
+        current_head = self.head
+        
+        if current_head:
+            new_node.next = current_head
+        
+        self.head = new_node
+             
+        
        
 # Test the implementationW
 if __name__ == "__main__":
@@ -76,3 +103,7 @@ if __name__ == "__main__":
     print("[INFO] Current linked list:", end="\n")
     linked_list.display()
     print('\n')
+    
+    
+
+    

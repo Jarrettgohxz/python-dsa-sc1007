@@ -106,6 +106,17 @@ class LinkedList:
 
         return current
     
+    def get_items(self):
+        current = self.head
+        
+        items = []
+        
+        while current:
+            items.append(current.data)
+            current = current.next
+            
+        return items
+    
     def remove_node_at(self, index):
             
         current = self.head

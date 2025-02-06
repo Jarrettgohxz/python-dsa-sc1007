@@ -1,93 +1,90 @@
-class Node:
-    def __init__(self, data):
-        self.data = data
+class ListNode:
+    def __init__(self, item):
+        self.item = item
         self.next = None
 
-class LinkedList:
-    def __init__(self):
-        self.head = None
+def printList(head):
+    print("Current List:", end=" ")
+    cur = head
+    while cur is not None:
+        print(cur.item, end=" ")
+        cur = cur.next
+    print()
 
-    def insert(self, data, index):
-        new_node = Node(data)
+def findNode(head, index):
+    if head is None or index < 0:
+        return None
+    cur = head
+    while index > 0:
+        cur = cur.next
+        if cur is None:
+            return None
+        index -= 1
+    return cur
 
-        if self.head is None or index == 0:
-            new_node.next = self.head
-            self.head = new_node
-            return 1
-    
-        current = self.head
-        count = 0
-    
-        while current and count < index - 1:
-            current = current.next
-            count += 1
-    
+def insertNode(ptrHead, index, value):
+    newNode = ListNode(value)
+    if ptrHead is None:
+        return newNode
+    if index == 0:
+        newNode.next = ptrHead
+        return newNode
+    cur = ptrHead
+    prev = None
+    count = 0
+    while cur is not None and count < index:
+        prev = cur
+        cur = cur.next
+        count += 1
+    if prev is not None:
+        prev.next = newNode
+        newNode.next = cur
+    return ptrHead
+
+def removeNode(ptrHead, index):
+    current = ptrHead
+
+    if index == 0:
+        ptrHead = ptrHead.next
+        return 1
+
+    while index > 1:
+        current = current.next
+
         if not current:
-            print("Index out of range")
             return 0
-        
-        new_node.next = current.next
-        current.next = new_node
-        return 1
 
-    def remove(self, index):
-        current = self.head
+        index-=1
 
-        if index == 0:
-            self.head = current.next
-
-        while index > 1:
-            current = current.next
-
-            if not current:
-                return 0
-
-            index-=1
-        
-        current.next = current.next.next
-        return 1
+    current.next = current.next.next
+    return 1
 
 
-        
-    def printList(self):
-        current = self.head
-        while current:
-            print(current.data, end=" ")
-            current = current.next
-        print()
-
-# Test the implementation
 if __name__ == "__main__":
-    linked_list = LinkedList()
+    head = None
     size = 0
-    
     print("Enter one number per line (press Enter after each number).")
     print("Enter any non-digit character to finish input:")
     while True:
         try:
             item = int(input())
-            if linked_list.insert(item, size) == 1:
-                size += 1
-                print("Node successfully inserted")
-            else:
-                print("Insertion failed")
-            print("Current List:", end=" ")
-            linked_list.printList()
+            head = insertNode(head, size, item)
+            size += 1
         except ValueError:
             break
+    printList(head)
     
     while True:
         try:
             index = int(input("Enter the index of the node to be removed: "))
-            if linked_list.remove(index) == 1:
+            result = removeNode(head, index)
+            if result == 1:
                 size -= 1
                 print("Node successfully removed")
             else:
                 print("Removal failed")
             print("After the removal operation:")
-            linked_list.printList()
+            printList(head)
         except ValueError:
             break
-    
-    print("Final List:", end=" ")
-    linked_list.printList()
+    printList(head)

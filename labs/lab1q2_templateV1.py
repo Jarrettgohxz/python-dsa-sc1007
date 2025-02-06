@@ -1,12 +1,14 @@
 class ListNode:
-    def __init__(self, item):  
+    def __init__(self, item):
         self.item = item
         self.next = None
 
+
 class LinkedList:
-    def __init__(self):  
+    def __init__(self):
         self.head = None
         self.size = 0
+
 
 def printList2(ll):
     if ll.head is not None:
@@ -16,6 +18,7 @@ def printList2(ll):
             print(cur.item, end=" ")
             cur = cur.next
         print()
+
 
 def findNode2(ll, index):
     if ll.head is not None:
@@ -30,6 +33,7 @@ def findNode2(ll, index):
         return cur
     else:
         return None
+
 
 def insertNode2(ll, index, item):
     newNode = ListNode(item)
@@ -49,6 +53,7 @@ def insertNode2(ll, index, item):
         return True
     return False
 
+
 def removeNode2(ll, index):
     current = ll.head
 
@@ -62,13 +67,13 @@ def removeNode2(ll, index):
         if not current:
             return 0
 
-        index-=1
-    
+        index -= 1
+
     current.next = current.next.next
     return 1
 
 
-if __name__ == "__main__":  
+if __name__ == "__main__":
     ll = LinkedList()
     print("Enter one number per line (press Enter after each number).")
     print("Enter any non-digit character to finish input:")
@@ -80,7 +85,7 @@ if __name__ == "__main__":
     except ValueError:
         pass
     printList2(ll)
-    
+
     while True:
         try:
             index = int(input("Enter the index of the node to be removed: "))

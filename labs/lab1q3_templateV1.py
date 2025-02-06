@@ -3,12 +3,14 @@ class ListNode:
         self.num = num
         self.next = None
 
+
 def printList(head):
     cur = head
     while cur is not None:
         print(cur.num, end=" ")
         cur = cur.next
     print()
+
 
 def findNode(head, index):
     if head is None or index < 0:
@@ -21,6 +23,7 @@ def findNode(head, index):
         index -= 1
     return cur
 
+
 def insertNode(ptrHead, index, value):
     newNode = ListNode(value)
     if ptrHead is None:
@@ -28,7 +31,7 @@ def insertNode(ptrHead, index, value):
     if index == 0:
         newNode.next = ptrHead
         return newNode
-    
+
     cur = ptrHead
     prev = None
     count = 0
@@ -41,45 +44,47 @@ def insertNode(ptrHead, index, value):
         newNode.next = cur
     return ptrHead
 
+
 def deleteList(ptrHead):
     cur = ptrHead
     while cur is not None:
         temp = cur.next
-        cur.next = None  
+        cur.next = None
         cur = temp
     return None
+
 
 def split(head, ptrEvenList, ptrOddList):
     current = head
     curEvenPtr = None
     curOddPtr = None
 
-
-
     while current:
 
         if (current.num % 2) == 0:
 
-            if len(ptrEvenList) == 0:
-                ptrEvenList.append(current)
-                curEvenPtr = current
-            
-            else:
-                curEvenPtr.next = current
+            new_node = ListNode(current.num)
 
-        
-        else:
-            if len(ptrOddList) == 0:
-                ptrOddList.append(current)
-                curOddPtr = current
-            
+            if len(ptrEvenList) == 0 and not curEvenPtr:
+                curEvenPtr = new_node
+                ptrEvenList.append(curEvenPtr)
+
             else:
-                curOddPtr.next = current
+                curEvenPtr.next = new_node
+                curEvenPtr = new_node
+
+        else:
+            new_node = ListNode(current.num)
+
+            if len(ptrOddList) == 0 and not curOddPtr:
+                curOddPtr = new_node
+                ptrOddList.append(curOddPtr)
+
+            else:
+                curOddPtr.next = new_node
+                curOddPtr = new_node
 
         current = current.next
-
-
-
 
 
 if __name__ == "__main__":
@@ -87,7 +92,7 @@ if __name__ == "__main__":
     oddHead = []
     evenHead = []
     index = 0
-    
+
     print("Enter one number per line (press Enter after each number).")
     print("Enter any non-digit character to finish input:")
     try:
@@ -102,9 +107,8 @@ if __name__ == "__main__":
     print("\nBefore split() is called:")
     print("The original list:", end=" ")
     printList(head)
-    
-    split(head, evenHead, oddHead)
 
+    split(head, evenHead, oddHead)
 
     print("\nAfter split() was called:")
     print("The original list:", end=" ")
@@ -113,7 +117,7 @@ if __name__ == "__main__":
     printList(evenHead[0])
     print("The odd list:", end=" ")
     printList(oddHead[0])
-    
+
     head = deleteList(head)
     oddHead[0] = deleteList(oddHead[0])
     evenHead[0] = deleteList(evenHead[0])

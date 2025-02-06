@@ -54,7 +54,11 @@ def split(head, ptrEvenList, ptrOddList):
     curEvenPtr = None
     curOddPtr = None
 
+
+
     while current:
+        print(current.num)
+
         if (current.num % 2) == 0:
 
             if len(ptrEvenList) == 0:
@@ -66,7 +70,7 @@ def split(head, ptrEvenList, ptrOddList):
                 curEvenPtr.next = current
         
         else:
-            if len(ptrEvenList) == 0:
+            if len(ptrOddList) == 0:
                 current.next = None
                 ptrOddList.append(current)
                 curOddPtr = current
@@ -102,7 +106,11 @@ if __name__ == "__main__":
     printList(head)
     
     split(head, evenHead, oddHead)
-    
+
+    print(evenHead)
+    print(oddHead)
+    exit()
+
     print("\nAfter split() was called:")
     print("The original list:", end=" ")
     printList(head)

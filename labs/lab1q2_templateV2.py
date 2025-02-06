@@ -50,6 +50,7 @@ class LinkedList:
 
         if index == 0:
             self.head = current.next
+            return 1
 
         while index > 1:
             current = current.next

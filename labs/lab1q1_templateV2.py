@@ -45,7 +45,8 @@ def removeNode(ptrHead, index):
     current = ptrHead
 
     if index == 0:
-        ptrHead = ptrHead.next
+        ptrHead.item = ptrHead.next.item
+        ptrHead.next = ptrHead.next.next
         return 1
 
     while index > 1:

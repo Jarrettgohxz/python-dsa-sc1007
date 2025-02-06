@@ -31,7 +31,6 @@ def insertNode(ptrHead, index, value):
     if index == 0:
         newNode.next = ptrHead
         return newNode
-
     cur = ptrHead
     prev = None
     count = 0
@@ -54,70 +53,48 @@ def deleteList(ptrHead):
     return None
 
 
-def split(head, ptrEvenList, ptrOddList):
+def duplicateReverse(head, ptrNewHead):
     current = head
-    curEvenPtr = None
-    curOddPtr = None
 
     while current:
+        val = current.num
 
-        if (current.num % 2) == 0:
+        new_node = ListNode(val)
 
-            new_node = ListNode(current.num)
-
-            if len(ptrEvenList) == 0 and not curEvenPtr:
-                ptrEvenList.append(new_node)
-
-            else:
-                curEvenPtr.next = new_node
-
-            curEvenPtr = new_node
+        if ptrNewHead[0] == None:
+            ptrNewHead[0] = new_node
 
         else:
-            new_node = ListNode(current.num)
-
-            if len(ptrOddList) == 0 and not curOddPtr:
-                curOddPtr = new_node
-                ptrOddList.append(curOddPtr)
-
-            else:
-                curOddPtr.next = new_node
-                curOddPtr = new_node
+            new_node.next = ptrNewHead[0]
+            ptrNewHead[0] = new_node
 
         current = current.next
 
 
 if __name__ == "__main__":
     head = None
-    oddHead = []
-    evenHead = []
-    index = 0
+    dupRevHead = [None]
 
-    print("Enter one number per line (press Enter after each number).")
+    print("Enter a list of numbers, terminated by any non-digit character:")
     print("Enter any non-digit character to finish input:")
     try:
         while True:
             item = int(input())
-            head = insertNode(head, index, item)
-            print(f"Successfully inserted {item} at index {index}")
-            index += 1
+            head = insertNode(head, 0, item)
     except ValueError:
         pass
 
-    print("\nBefore split() is called:")
+    print("\nBefore duplicateReverse() is called:")
     print("The original list:", end=" ")
     printList(head)
 
-    split(head, evenHead, oddHead)
+    duplicateReverse(head, dupRevHead)
 
-    print("\nAfter split() was called:")
+    print("\nAfter duplicateReverse() was called:")
     print("The original list:", end=" ")
     printList(head)
-    print("The even list:", end=" ")
-    printList(evenHead[0])
-    print("The odd list:", end=" ")
-    printList(oddHead[0])
+    print("The duplicated reverse list:", end=" ")
+    printList(dupRevHead[0])
 
     head = deleteList(head)
-    oddHead[0] = deleteList(oddHead[0])
-    evenHead[0] = deleteList(evenHead[0])
+    dupRevHead[0] = deleteList(dupRevHead[0])

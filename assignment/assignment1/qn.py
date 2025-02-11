@@ -81,15 +81,14 @@ def moveOdditemstoback(head):
 
     # index 0
     if (cur.data % 2 != 0):
-        print()
+        shifted.append(cur)
+        head = cur.next
 
     # emulating a do-while loop
     while True:
         #
         # handle case if index 0 is the one that requires shifting - odd
         #
-
-        print(f'data: {cur.data}')
 
         # if (not cur.next):
         #     tail = cur

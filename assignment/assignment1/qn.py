@@ -77,28 +77,61 @@ def moveOdditemstoback(head):
     cur = head
     tail = None
 
+    shifted = []
+
+    # index 0
+    if (cur.data % 2 != 0):
+        print()
+
     # emulating a do-while loop
     while True:
+        #
+        # handle case if index 0 is the one that requires shifting - odd
+        #
 
-        if (cur.next.data % 2 == 0):
+        print(f'data: {cur.data}')
+
+        # if (not cur.next):
+        #     tail = cur
+        #     break
+
+        if (cur.next.data % 2 != 0):
+
+            # # no saved tail value
+            # if (not tail):
+
+            #     icur = head
+
+            #     while True:
+            #         icur = icur.next
+
+            #         if (not icur.next):
+            #             tail = icur
+            #             break
+
+            shifted.append(cur.next)
             cur.next = cur.next.next
 
-            # saved tail value
-            if (tail):
-                tail.next = cur.next
+            if (not cur.next):
+                tail = cur
+                break
+            elif (not cur.next.next):
+                tail = cur.next
+                break
 
-            # no saved tail value
-            else:
-                icur = head
-
-                while icur:
-                    icur = icur.next
+        else:
+            if not cur.next.next:
+                tail = cur.next
+                break
 
         cur = cur.next
 
-        # main iteration
-        if not cur:
-            break
+    for s in shifted:
+        s.next = None
+        tail.next = s
+        tail = s
+
+    return head
 
     # while current:
     #     current = current.next
@@ -117,6 +150,7 @@ if __name__ == "__main__":
     numbers = input_string.split()
 
     counter = 0
+    print(numbers)
     for num in numbers:
         try:
             linked_list.insertNode(int(num), counter)

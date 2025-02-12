@@ -89,6 +89,8 @@ def moveOdditemstoback(head):
         else:
             break
 
+    # portion that deals with the rest of list after clearing the negative values at the front
+    # cur (head value) will currently be a positive value - so can start checking cur.next 
     while True:
         
         if (cur.next.data % 2 != 0):
@@ -103,17 +105,22 @@ def moveOdditemstoback(head):
             continue
 
         else:
+            # prevents the first statement in the main while loop from getting error: cur.next.data to be undefined
+            # since cur = cur.next is ran on the last else scope
             if not cur.next.next:
                 tail = cur.next
                 break
 
-        
-        if not cur.next:
-            tail = cur
-            break
-        else:
-            cur = cur.next
+            # prevent cur (assigned from cur.next in the last else scope) to be undefined
+            elif not cur.next:
+                tail = cur
+                break
+            
+            # simply increment
+            else:
+                cur = cur.next
 
+    # append the negative values (removed from the main list) to the back
     for s in shifted:
         s.next = None
         tail.next = s

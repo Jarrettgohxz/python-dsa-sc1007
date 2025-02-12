@@ -105,9 +105,17 @@ if __name__ == "__main__":
         except ValueError:
             break
 
-    print("\nBefore:", end=" ")
-    linked_list.printList()
 
-    linked_list.head = moveMinNode(linked_list.head)
-    print("After:", end=" ")
-    linked_list.printList()
+print("\nBefore:", end=" ")
+linked_list.printList()
+
+linked_list.head = moveMinNode(linked_list.head)
+print("After:", end=" ")
+linked_list.printList()
+
+print("\nBefore:", end=" ")
+linked_list.printList()
+
+linked_list.head = moveMinNode(linked_list.head)
+print("After:", end=" ")
+linked_list.printList()

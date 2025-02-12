@@ -79,34 +79,19 @@ def moveOdditemstoback(head):
 
     shifted = []
 
-    # index 0
-    if (cur.data % 2 != 0):
-        shifted.append(cur)
-        head = cur.next
-
-    # emulating a do-while loop
+    # handle negative values at the front
     while True:
-        #
-        # handle case if index 0 is the one that requires shifting - odd
-        #
+        if (cur.data % 2 != 0):
+            shifted.append(cur)
+            head = cur.next
+            cur = head
+        
+        else:
+            break
 
-        # if (not cur.next):
-        #     tail = cur
-        #     break
-
+    while True:
+        
         if (cur.next.data % 2 != 0):
-
-            # # no saved tail value
-            # if (not tail):
-
-            #     icur = head
-
-            #     while True:
-            #         icur = icur.next
-
-            #         if (not icur.next):
-            #             tail = icur
-            #             break
 
             shifted.append(cur.next)
             cur.next = cur.next.next
@@ -114,16 +99,20 @@ def moveOdditemstoback(head):
             if (not cur.next):
                 tail = cur
                 break
-            elif (not cur.next.next):
-                tail = cur.next
-                break
+            
+            continue
 
         else:
             if not cur.next.next:
                 tail = cur.next
                 break
 
-        cur = cur.next
+        
+        if not cur.next:
+            tail = cur
+            break
+        else:
+            cur = cur.next
 
     for s in shifted:
         s.next = None
@@ -132,13 +121,7 @@ def moveOdditemstoback(head):
 
     return head
 
-    # while current:
-    #     current = current.next
 
-    #     data = current.data
-
-    #     # if even
-    #     if (data % 2 == 0):
 
 
 if __name__ == "__main__":

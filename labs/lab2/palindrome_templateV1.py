@@ -118,11 +118,60 @@ class Queue:
     def isEmpty(self):
         return self.ll.size == 0
 
-def palindrome(word):
-#Write your code here #
+def palindrome(word, option):
+
+    word = word.lower().replace(' ', '')
+
+    if (option == 0):
+        #
+        # WITH Stack
+        #
+
+        s = Stack()
+
+        index = 0
+
+
+        for w in word:
+            s.push(w)
+            index+=1
+
+        rev_word = ''
+
+        for _ in range(index):
+            rev_word+=s.pop()
+        
+        if word == rev_word:
+            return 0
+        
+        else:
+            return -1
+
+
+    #
+    # EASIEST METHOD
+    #
+    else:
+        rev_word = word[::-1]
+        
+        if rev_word == word:
+            return 0
+        
+        else:
+            return -1
+
+
+
 
 if __name__ == "__main__":
     print("Sample String : A man a plan a canal Panama")
-    palindrome("A man a plan a canal Panama")
+    r = palindrome("A man a plan a canal Panama", 0)
+
+    if r == 0 :
+        print('string is a palindrome')
+
     print("Sample String : Superman in the sky")
-    palindrome("Superman in the sky")
+    r = palindrome("Superman in the sky", 0)
+
+    if r == 0 :
+        print('string is a palindrome')

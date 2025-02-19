@@ -1,4 +1,4 @@
-# x = a + b c%d >> e
+# x = a + b*c%d >> e
 
 class Stack:
     def __init__(self):
@@ -25,9 +25,18 @@ def infix_to_postfix(infix: str):
                 # check operator at top of stack has equal or higher precedence than the current operator
                 if operator_precedence.index(operator_top_of_stack) <= operator_precedence.index(v):
                     # pop operator from stack, append to postfix output
+                    
+                    
+                    # perform this until the last item in stack is lower (continue as long as the last oprerator in stack is higher than or equal precedence)
+                    ...
+                    
                     stack.pop()
 
                     postfix += operator_top_of_stack
+                    
+                # else simply push operator to stack
+                else:
+                    stack.push(v)
 
         # current value is not an operator - an operand
         # elif v in ('x', 'a', 'b', 'c', 'd', 'e'):

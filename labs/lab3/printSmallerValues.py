@@ -23,47 +23,41 @@ def printTree(node, level=0, prefix="Root: "):
                 printTree(node.right, level + 4, "R--- ")
 
 
-def mirrorTree(node):
-    # for each node after the root node -> swap left and right nodes
-    # perform post order traversal
+def printSmallerValues(node, m):
+    # perform pre order traversal
 
-    def post_order_traversal(cur_node):
+    print('\n')
+
+    def pre_order_traversal(cur_node):
         if cur_node is None:
             return
 
-        cur_node_left = cur_node.left
-        cur_node_right = cur_node.right
+        if cur_node.item < m:
+            print(cur_node.item)
 
-        post_order_traversal(cur_node_left)
-        post_order_traversal(cur_node_right)
+        pre_order_traversal(cur_node.left)
+        pre_order_traversal(cur_node.right)
 
-        if cur_node_left is not None or cur_node_right is not None:
-            temp_left = cur_node_left
-            cur_node.left = cur_node_right
-            cur_node.right = temp_left
-
-    post_order_traversal(node)
+    pre_order_traversal(node)
 
 
 if __name__ == "__main__":
     root = BTNode(4)
     root.left = BTNode(5)
     root.right = BTNode(2)
-    root.left.left = None
     root.left.right = BTNode(6)
     root.right.left = BTNode(3)
     root.right.right = BTNode(1)
 
-    print("Original Tree Structure:")
+    print("Tree Structure:")
     printTree(root)
-    print("\nOriginal Tree (In-Order):")
+
+    print("\nTree (In-Order):")
     print_tree_in_order(root)
     print()
 
-    mirrorTree(root)
-
-    print("\nMirrored Tree Structure:")
-    printTree(root)
-    print("\nMirrored Tree (In-Order):")
-    print_tree_in_order(root)
+    # Using a hardcoded value instead of input()
+    m = 5  # You can change this value for testing
+    print(f"\nThe values smaller than {m} are:", end=" ")
+    printSmallerValues(root, m)
     print()

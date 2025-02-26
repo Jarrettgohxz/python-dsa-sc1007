@@ -55,7 +55,6 @@ def hasGreatGrandchild(node):
             return
 
         recurse(cur_node, cur_node, 0)
-        recurse(cur_node, cur_node, 0)
 
         pre_order_traversal(cur_node.left)
         pre_order_traversal(cur_node.right)

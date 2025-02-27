@@ -6,6 +6,7 @@ class BTNode:
 
 def insertBSTNode(node, value):
 
+    # Only True if the initial function call (not recursive) passes in a root node value that is None
     if node is None:
         return BTNode(value)
 
@@ -26,8 +27,9 @@ def insertBSTNode(node, value):
         
         else:
             insertBSTNode(node.right, value)
-    
-    return root
+
+    # returns the root node value at the end of all the recursive function calls - node has been inserted
+    return node
 
 
 def printTree(node, level=0, prefix="Root: "):

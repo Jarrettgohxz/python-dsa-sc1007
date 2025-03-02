@@ -84,18 +84,6 @@ def removeAll(node):
         node = None
 
 
-# possible fail case:
-
-# tree1 =   1
-#         /   \
-#        2     3
-
-# tree2 =   1
-#         /
-#        2
-#         \
-#          3
-
 def identical(tree1, tree2):
 
     #

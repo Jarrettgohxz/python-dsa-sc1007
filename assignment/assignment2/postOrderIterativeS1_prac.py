@@ -48,7 +48,8 @@ def peek(stack):
         return stack.top.data
     return None
 
-# CHATGPT solution
+
+# MY OWN SOLUTION
 def postOrderIterativeS1(root):
     if root is None:
         return
@@ -57,33 +58,45 @@ def postOrderIterativeS1(root):
     lastVisitedNode = None
     
     while not is_empty(S) or root is not None:
-        if root:
+        # traverse all left nodes
+        while root is not None:
             push(S, root)
             root = root.left
+
         else:
-            peekNode = peek(S)
-            # If right child exists and hasn't been processed yet
-            if peekNode.right and lastVisitedNode != peekNode.right:
-                root = peekNode.right
+            top = peek(S)
+            
+            if top.right is not None:
+                # right subtree has been visited
+                if top.right == lastVisitedNode:
+                    top = pop(S)
+                    print(top.data, end=" ")
+                    lastVisitedNode = top
+                    
+                # right subtree has NOT been visited
+                else:   
+                    root = top.right
+                    lastVisitedNode = root
+                    
             else:
-                # Visit the node
-                print(peekNode.data, end=" ")
-                lastVisitedNode = pop(S)
-    
-#    cur = root
-   
-#     s = Stack()
-#     stack_node = StackNode(cur.data)
-#     s.top = stack_node
-    
-#     # process right subtree
-#     while node is not None:
-#         cur = cur.right
-#         new_stack_node = BSTNode(cur.right)
-#         stack_node.next = new_stack_node
-        
-#         stack_node = new_stack_node
-        
+                top = pop(S)
+                print(top.data, end=" ") 
+            
+            # # if top is not None:            
+            # # 
+            # # if top.right == lastVisitedNode:
+            # if top == lastVisitedNode:
+            #     top = pop(S)
+            #     print(top.data, end=" ")
+            #     continue
+            
+            # # first time traversing right subtree
+            # else:      
+            #     # top = pop(S)          
+            #     root = top.right
+            #     # print(root.data, end=" ")
+            #     lastVisitedNode = root
+            
           
         
     

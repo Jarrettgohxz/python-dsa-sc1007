@@ -101,27 +101,11 @@ def sort_stack(stack):
             S.push(cur)
 
         else:
-            while True:
-                if temp_top is None:
-                    S.push(cur)
-                    break
+            while temp_top is not None and cur < temp_top:
+                stack.push(S.pop())
+                temp_top = S.peek()
 
-                if cur < temp_top and not S.is_empty():
-                    stack.push(S.pop())
-                    temp_top = S.peek()
-
-                else:
-                    S.push(cur)
-                    break
-
-            # while cur < temp_top and not S.is_empty():
-            #     stack.push(temp_top)
-            #     temp_top = S.pop()
-
-            # if S.is_empty():
-            #     stack.push(temp_top)
-
-            # S.push(cur)
+            S.push(cur)
 
     while not S.is_empty():
         stack.push(S.pop())

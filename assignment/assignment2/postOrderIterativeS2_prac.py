@@ -50,44 +50,30 @@ def is_empty(stack):
     return stack.top is None
 
 
-def peek(stack):
-    if stack.top is not None:
-        return stack.top.data
-    return None
+def postOrderIterativeS2(root):
 
-
-# MY OWN SOLUTION
-def postOrderIterativeS1(root):
     if root is None:
         return
 
-    S = Stack()
-    lastVisitedNode = None
+    S1 = Stack()  # store current nodes
+    S2 = Stack()  # store nodes to print in reverse order
 
-    while not is_empty(S) or root is not None:
-        # traverse all left nodes
+    while not is_empty(S1) or root is not None:
         while root is not None:
-            push(S, root)
-            root = root.left
+            push(S1, root)
+            push(S2, root)
+            root = root.right
 
         else:
-            top = peek(S)
+            top = pop(S1)
 
-            if top.right is not None:
-                # right subtree has been visited
-                if top.right == lastVisitedNode:
-                    top = pop(S)
-                    print(top.data, end=" ")
-                    lastVisitedNode = top
+            if top.left is not None:
+                root = top.left
 
-                # right subtree has NOT been visited
-                else:
-                    root = top.right
-                    lastVisitedNode = root
-
-            else:
-                top = pop(S)
-                print(top.data, end=" ")
+    # simply print the post-order traversal
+    while not is_empty(S2):
+        node = pop(S2)
+        print(node.data, end=" ")
 
 
 if __name__ == "__main__":
@@ -106,7 +92,7 @@ if __name__ == "__main__":
             root = insert(root, value)
         elif choice == 2:
             print("Post-order traversal: ", end="")
-            postOrderIterativeS1(root)
+            postOrderIterativeS2(root)
             print()
         elif choice == 0:
             break

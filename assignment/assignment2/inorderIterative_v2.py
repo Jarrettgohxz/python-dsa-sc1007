@@ -54,14 +54,15 @@ def inorderIterative(root):
     S = Stack()
     cur = root
 
-    while cur is not None or not is_empty(S):
+    while not is_empty(S) or cur is not None:
         while cur is not None:
             push(S, cur)
             cur = cur.left
 
-        popped_item = pop(S)
-        print(popped_item.data, end=" ")
-        cur = popped_item.right
+        top = pop(S)
+        print(top.data, end=' ')
+
+        cur = top.right
 
 
 if __name__ == "__main__":

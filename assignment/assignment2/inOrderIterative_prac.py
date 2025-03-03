@@ -50,44 +50,21 @@ def is_empty(stack):
     return stack.top is None
 
 
-def peek(stack):
-    if stack.top is not None:
-        return stack.top.data
-    return None
-
-
-# MY OWN SOLUTION
-def postOrderIterativeS1(root):
-    if root is None:
-        return
-
+def inorderIterative(root):
     S = Stack()
-    lastVisitedNode = None
+    cur = root
 
-    while not is_empty(S) or root is not None:
-        # traverse all left nodes
-        while root is not None:
-            push(S, root)
-            root = root.left
+    while not is_empty(S) or cur is not None:
+        while cur is not None:
+            push(S, cur)
+            cur = cur.left
 
         else:
-            top = peek(S)
+            top = pop(S)
+            print(top.data, end=' ')
 
             if top.right is not None:
-                # right subtree has been visited
-                if top.right == lastVisitedNode:
-                    top = pop(S)
-                    print(top.data, end=" ")
-                    lastVisitedNode = top
-
-                # right subtree has NOT been visited
-                else:
-                    root = top.right
-                    lastVisitedNode = root
-
-            else:
-                top = pop(S)
-                print(top.data, end=" ")
+                cur = top.right
 
 
 if __name__ == "__main__":
@@ -95,7 +72,7 @@ if __name__ == "__main__":
     choice = 1
 
     print("1: Insert an integer into the binary search tree")
-    print("2: Print the post-order traversal of the binary search tree")
+    print("2: Print the in-order traversal of the binary search tree")
     print("0: Quit")
 
     while choice != 0:
@@ -105,8 +82,8 @@ if __name__ == "__main__":
             value = int(input("Input an integer to insert: "))
             root = insert(root, value)
         elif choice == 2:
-            print("Post-order traversal: ", end="")
-            postOrderIterativeS1(root)
+            print("In-order traversal: ", end="")
+            inorderIterative(root)
             print()
         elif choice == 0:
             break

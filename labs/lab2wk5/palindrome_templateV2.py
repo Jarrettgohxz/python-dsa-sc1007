@@ -3,6 +3,7 @@ class ListNode:
         self.item = item
         self.next = None
 
+
 class LinkedList:
     def __init__(self):
         self.size = 0
@@ -27,9 +28,9 @@ class LinkedList:
     def insert_node(self, index, value):
         if index < 0 or index > self.size:
             return -1
-            
+
         new_node = ListNode(value)
-        
+
         if index == 0:
             new_node.next = self.head
             self.head = new_node
@@ -42,14 +43,14 @@ class LinkedList:
             prev = self.find_node(index - 1)
             new_node.next = prev.next
             prev.next = new_node
-            
+
         self.size += 1
         return 0
 
     def remove_node(self, index):
         if index < 0 or index >= self.size:
             return -1
-            
+
         if index == 0:
             self.head = self.head.next
             if self.size == 1:
@@ -59,9 +60,10 @@ class LinkedList:
             prev.next = prev.next.next
             if index == self.size - 1:
                 self.tail = prev
-                
+
         self.size -= 1
         return 0
+
 
 class Stack:
     def __init__(self):
@@ -85,19 +87,43 @@ class Stack:
     def is_empty(self):
         return self.ll.size == 0
 
-def remove_until(stack, value):
-    
-    while stack.peek() != value:
-        stack.pop()
+
+class Queue:
+    def __init__(self):
+        self.ll = LinkedList()
+
+    def enqueue(self, item):
+        self.ll.insert_node(self.ll.size, item)
+
+    def dequeue(self):
+        if self.is_empty():
+            return None
+        item = self.ll.head.item
+        self.ll.remove_node(0)
+        return item
+
+    def is_empty(self):
+        return self.ll.size == 0
+
+
+def palindrome(word):
+    S = Stack()
+
+    word = word.replace(' ', '').lower()
+
+    for w in word:
+        S.push(w)
+
+    rev = ''
+
+    while not S.is_empty():
+        rev += S.pop()
+
+    print(1 if rev == word else 0)
+
 
 if __name__ == "__main__":
-    stack = Stack()
-    items = [1, 2, 3, 4, 5, 6, 5, 4, 3, 2, 1]
-    for item in items:
-        stack.push(item)
-    
-    print("Original Stack:")
-    stack.ll.print_list()
-    remove_until(stack, 5)
-    print("Stack after remove_until:")
-    stack.ll.print_list()
+    print("Sample String : A man a plan a canal Panama")
+    palindrome("A man a plan a canal Panama")
+    print("Sample String : Superman in the sky")
+    palindrome("Superman in the sky")

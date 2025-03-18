@@ -3,11 +3,13 @@ class ListNode:
         self.item = item
         self.next = None
 
+
 class LinkedList:
     def __init__(self):
         self.size = 0
         self.head = None
         self.tail = None
+
 
 def printList(head):
     temp = head
@@ -17,6 +19,7 @@ def printList(head):
         print(temp.item, end=" ")
         temp = temp.next
     print()
+
 
 def findNode(ll, index):
     if ll is None or index < 0 or index >= ll.size:
@@ -28,6 +31,7 @@ def findNode(ll, index):
             return None
         index -= 1
     return temp
+
 
 def insertNode(ll, index, value):
     if ll is None or index < 0 or index > ll.size:
@@ -57,6 +61,7 @@ def insertNode(ll, index, value):
         return 0
     return -1
 
+
 def removeNode(ll, index):
     if ll is None or index < 0 or index >= ll.size:
         return -1
@@ -79,6 +84,7 @@ def removeNode(ll, index):
         return 0
     return -1
 
+
 class Queue:
     def __init__(self):
         self.ll = LinkedList()
@@ -96,24 +102,25 @@ class Queue:
     def isEmpty(self):
         return self.ll.size == 0
 
+
 def recursiveReverse(queue):
-    rev_queue = []
-    
-    while not queue.isEmpty():
-        q = queue.dequeue()
-        rev_queue.append(q)
-    
-    rev_queue.reverse()
-    
-    for q in rev_queue:
-        queue.enqueue(q)
-        
+
+    v = queue.dequeue()
+
+    if v is None:
+        return
+
+    else:
+        recursiveReverse(queue)
+
+    queue.enqueue(v)
+
 
 if __name__ == "__main__":
     queue = Queue()
     for i in range(10):
         queue.enqueue(i)
-    
+
     print("Original Queue:")
     printList(queue.ll.head)
     recursiveReverse(queue)

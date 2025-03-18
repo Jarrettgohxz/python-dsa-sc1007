@@ -3,11 +3,13 @@ class ListNode:
         self.item = item
         self.next = None
 
+
 class LinkedList:
     def __init__(self):
         self.size = 0
         self.head = None
         self.tail = None
+
 
 def printList(head):
     temp = head
@@ -17,6 +19,7 @@ def printList(head):
         print(temp.item, end=" ")
         temp = temp.next
     print()
+
 
 def findNode(ll, index):
     if ll is None or index < 0 or index >= ll.size:
@@ -28,6 +31,7 @@ def findNode(ll, index):
             return None
         index -= 1
     return temp
+
 
 def insertNode(ll, index, value):
     if ll is None or index < 0 or index > ll.size:
@@ -57,6 +61,7 @@ def insertNode(ll, index, value):
         return 0
     return -1
 
+
 def removeNode(ll, index):
     if ll is None or index < 0 or index >= ll.size:
         return -1
@@ -78,6 +83,7 @@ def removeNode(ll, index):
         ll.size -= 1
         return 0
     return -1
+
 
 class Stack:
     def __init__(self):
@@ -101,6 +107,7 @@ class Stack:
     def isEmpty(self):
         return self.ll.size == 0
 
+
 class Queue:
     def __init__(self):
         self.ll = LinkedList()
@@ -118,6 +125,7 @@ class Queue:
     def isEmpty(self):
         return self.ll.size == 0
 
+
 def palindrome(word, option):
 
     word = word.lower().replace(' ', '')
@@ -131,47 +139,43 @@ def palindrome(word, option):
 
         index = 0
 
-
         for w in word:
             s.push(w)
-            index+=1
+            index += 1
 
         rev_word = ''
 
         for _ in range(index):
-            rev_word+=s.pop()
-        
+            rev_word += s.pop()
+
         if word == rev_word:
             return 0
-        
+
         else:
             return -1
-
 
     #
     # EASIEST METHOD
     #
     else:
         rev_word = word[::-1]
-        
+
         if rev_word == word:
             return 0
-        
+
         else:
             return -1
-
-
 
 
 if __name__ == "__main__":
     print("Sample String : A man a plan a canal Panama")
     r = palindrome("A man a plan a canal Panama", 0)
 
-    if r == 0 :
+    if r == 0:
         print('string is a palindrome')
 
     print("Sample String : Superman in the sky")
     r = palindrome("Superman in the sky", 0)
 
-    if r == 0 :
+    if r == 0:
         print('string is a palindrome')

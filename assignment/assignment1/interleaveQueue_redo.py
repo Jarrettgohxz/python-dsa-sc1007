@@ -127,24 +127,29 @@ class Queue:
 
 
 def interleaveQueue(q):
-    l1 = []
-    l2 = []
-
     size = q.getSize()
+    S = Stack()
 
-    for i in range(size):
+    i = 0
 
-        if i < size/2:
-            l1.append(q.dequeue())
+    def recurse(i):
+        v = q.dequeue()
+
+        if i == (size//2 - 1):
+            S.push(q.dequeue())
+            S.push(v)
+            return
 
         else:
-            l2.append(q.dequeue())
+            recurse(i+1)
 
-    l2.reverse()
+        S.push(q.dequeue())
+        S.push(v)
 
-    for i in range(int(size/2)):
-        q.enqueue(l1[i])
-        q.enqueue(l2[i])
+    recurse(i)
+
+    while not S.isEmpty():
+        q.enqueue(S.pop())
 
 
 if __name__ == "__main__":

@@ -3,11 +3,13 @@ class ListNode:
         self.item = item
         self.next = None
 
+
 class LinkedList:
     def __init__(self):
         self.size = 0
         self.head = None
         self.tail = None
+
 
 def findNode(ll, index):
     if ll is None or index < 0 or index >= ll.size:
@@ -19,6 +21,7 @@ def findNode(ll, index):
             return None
         index -= 1
     return temp
+
 
 def insertNode(ll, index, value):
     if ll is None or index < 0 or index > ll.size:
@@ -48,6 +51,7 @@ def insertNode(ll, index, value):
         return 0
     return -1
 
+
 def removeNode(ll, index):
     if ll is None or index < 0 or index >= ll.size:
         return -1
@@ -69,6 +73,7 @@ def removeNode(ll, index):
         ll.size -= 1
         return 0
     return -1
+
 
 class Stack:
     def __init__(self):
@@ -92,6 +97,7 @@ class Stack:
     def isEmpty(self):
         return self.ll.size == 0
 
+
 def balanced(expression):
     s = Stack()
 
@@ -107,19 +113,17 @@ def balanced(expression):
             e = '[' if e == ']' else ']'
 
         s.push(e)
-    
+
     rev_e = ''
 
     while not s.isEmpty():
         rev_e += s.pop()
 
-
     if rev_e == expression:
         return 1
-    
+
     else:
         return 0
-
 
 
 if __name__ == "__main__":
